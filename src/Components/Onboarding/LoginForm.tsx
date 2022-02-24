@@ -28,11 +28,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   formMain: {
-    padding: theme.spacing(6, 5),
+    display: 'flex',
+    flexDirection: 'column',
+    padding: theme.spacing(8, 5, 0, 5),
     width: 'auto',
     height: '100vh',
     borderRadius: '0px',
-    backgroundColor: theme.palette.background.default,
+    background: theme.palette.background.default,
     [theme.breakpoints.down('sm')]: {
       width: '100%',
       padding: theme.spacing(4, 4),
@@ -62,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   formControl: {
-    marginTop: theme.spacing(1.5),
+    // marginTop: theme.spacing(1.5),
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -91,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     background: theme.palette.primary.main,
-    width: '80%',
+    width: '90%',
     color: theme.palette.text.primary,
     marginTop: theme.spacing(2),
     alignSelf: 'flex-start',
@@ -104,13 +106,13 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1.5),
       padding: theme.spacing(2, 2),
       height: '40px',
-      width: '60%',
+      width: '100%',
     },
   },
 }));
 
 const validationSchema = yup.object().shape({
-  email: yup.string().email('Enter a valid email').required('Email is required'),
+  username: yup.string().required('Username is required'),
   password: yup
     .string()
     .min(8, 'Password should be of minimum 8 characters length')
@@ -118,7 +120,7 @@ const validationSchema = yup.object().shape({
 });
 
 export interface LoginFormData {
-  email: string;
+ username: string;
   password: string;
 }
 
@@ -130,13 +132,12 @@ interface LoginFormProps {
 
 export const LoginForm: React.FC<LoginFormProps> = () => {
   const initialValues = {
-    email: '',
+    username: '',
     password: '',
   };
 
   const handleSubmit = (values: LoginFormData, formik: FormikHelpers<LoginFormData>) => {
     formik.setSubmitting(false);
-    // prevent fields from disabling
   };
   const classes = useStyles();
   // if (!visible) {
@@ -160,15 +161,15 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
               <Field
                 className={classes.formControl}
                 variant="outlined"
-                id="email"
-                type="email"
-                name="email"
-                label="Email"
+                id="username"
+                type="username"
+                name="username"
+                label="Username"
                 component={InputTextField}
-                value={values.email}
+                value={values.username}
                 onChange={handleChange}
-                error={touched.email && Boolean(errors.email)}
-                helperText={touched.email && errors.email}
+                error={touched.username && Boolean(errors.username)}
+                helperText={touched.username && errors.username}
               />
               <Field
                 className={classes.formControl}
@@ -177,7 +178,6 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
                 name="password"
                 type="password"
                 label="Password"
-                placeholder="Password"
                 component={InputTextField}
                 value={values.password}
                 onChange={handleChange}

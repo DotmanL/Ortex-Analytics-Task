@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loginFormContainer: {
     width: '35%',
+    background: theme.palette.background.paper,
     [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
@@ -39,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
   dataContainer: {
     display: 'flex',
-    background: theme.palette.primary.main,
+    background: theme.palette.background.default,
+    borderLeft: '5px solid red',
     width: '65%',
     [theme.breakpoints.down('sm')]: {
       display: 'none',
