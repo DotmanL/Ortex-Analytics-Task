@@ -24,22 +24,22 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   appBar: {
-    background: theme.palette.background.default,
-    color: 'black',
+    background: theme.palette.background.paper,
     top: '0',
     // boxShadow: 'none',
     height: '90px',
+    borderBottom: '0px solid',
+    borderBottomColor: theme.palette.divider,
+    // width: '100vw',
     padding: theme.spacing(0, 0),
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
       height: '60px',
-      borderBottom: '2px solid white',
     },
   },
   new: {
-    backgroundColor: theme.palette.background.default,
+    background: theme.palette.background.paper,
     top: '0',
-    color: 'black',
     height: '90px',
     padding: theme.spacing(0, 0),
     justifyContent: 'center',
@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    color: theme.palette.text.primary,
     // background: 'green',
   },
   appName: {
@@ -127,7 +128,7 @@ export const NavBar: React.FC<NavBarProps> = ({ appName }) => {
 
   return (
     <AppBar
-      position="static"
+      position="fixed"
       className={classnames({
         [classes.new]: scrolledDownEnough,
         [classes.appBar]: !scrolledDownEnough,
