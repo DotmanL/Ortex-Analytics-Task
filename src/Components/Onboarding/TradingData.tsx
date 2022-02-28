@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const socket = new WebSocket('ws://stream.tradingeconomics.com/?client=guest:guest');
+const socket = new WebSocket('wss://stream.tradingeconomics.com/?client=guest:guest');
 
 const apiCall = {
   topic: 'subscribe',
