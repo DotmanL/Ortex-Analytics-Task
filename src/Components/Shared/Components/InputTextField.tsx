@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@mui/styles';
 import { TextField, TextFieldProps } from 'formik-material-ui';
+
 import { PasswordTextField } from './PasswordTextField';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,19 +18,19 @@ const useStyles = makeStyles((theme) => ({
   input: {},
 }));
 
-const CssTextField = withStyles({
+const CssTextField = withStyles((theme) => ({
   root: {
     '& .MuiOutlinedInput-root': {
-      background: '#EEF2F6',
-      // color: '#27AE60',
+      background: theme.palette.background.default,
     },
   },
-})(TextField);
+}))(TextField);
 
 type InputProps = TextFieldProps;
 
 export const InputTextField: React.FC<InputProps> = ({ className, ...props }) => {
   const classes = useStyles();
+
   const fieldProps = {
     ...props,
     className: `${classes.styling} ${className}`,

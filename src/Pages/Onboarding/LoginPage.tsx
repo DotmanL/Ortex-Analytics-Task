@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-// import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import { Helmet } from 'react-helmet';
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { NavBar } from '../../Components/Shared/Components/Navbar';
 import { LoginForm } from '../../Components/Onboarding/LoginForm';
+import LandingPage from '../../Components/Onboarding/LandingPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,17 +31,18 @@ const useStyles = makeStyles((theme) => ({
   },
   loginFormContainer: {
     width: '35%',
-    background: theme.palette.background.paper,
+    background: theme.palette.primary.main,
     [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
 
   },
-  dataContainer: {
+  landingPageContainer: {
     display: 'flex',
-    background: theme.palette.background.default,
-    borderLeft: '5px solid red',
+    background: theme.palette.mainBackground.color,
+    // background: 'red',
     width: '65%',
+    padding: theme.spacing(8, 3, 3, 15),
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
@@ -52,21 +52,19 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage: React.FC = () => {
   const classes = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
   return (
     <Grid container className={classes.root}>
       <Helmet>
         <title>Sign In - Ortex</title>
       </Helmet>
-      <NavBar appName="Ortex" />
+      <NavBar appName="O R T E X" />
       <Grid container className={classes.container}>
         <Grid className={classes.loginFormContainer}>
           <LoginForm isSubmitting={false} />
         </Grid>
-        <Grid className={classes.dataContainer}>
-          <Typography variant="h4" sx={{ color: theme.palette.text.primary, mt: 1 }}>
-            Welcome to Ortex
-          </Typography>
+        <Grid className={classes.landingPageContainer}>
+          <LandingPage />
         </Grid>
       </Grid>
     </Grid>

@@ -9,6 +9,9 @@ export const getDesignTokens = (mode: PaletteMode) => ({
     ...(mode === 'light'
       ? {
         primary: cyan,
+        mainBackground: {
+          color: 'lightseagreen',
+        },
         divider: grey[800],
         background: {
           default: 'white',
@@ -21,6 +24,9 @@ export const getDesignTokens = (mode: PaletteMode) => ({
       }
       : {
         primary: deepOrange,
+        mainBackground: {
+          color: '#ff8c00',
+        },
         divider: grey[800],
         background: {
           default: '#121212',

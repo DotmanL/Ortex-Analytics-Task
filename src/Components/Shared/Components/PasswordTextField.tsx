@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
 
 type InputProps = TextFieldProps;
 
-const CssTextField = withStyles({
+const CssTextField = withStyles((theme) => ({
   root: {
     '& .MuiOutlinedInput-root': {
-      background: '#EEF2F6',
+      background: theme.palette.background.default,
     },
   },
-})(MuiTextField);
+}))(MuiTextField);
 
 export const PasswordTextField: React.FC<InputProps> = ({ className, ...props }) => {
   const classes = useStyles();
@@ -57,7 +57,7 @@ export const PasswordTextField: React.FC<InputProps> = ({ className, ...props })
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
             >
-              {values.showPassword ? <Visibility /> : <VisibilityOff />}
+              {values.showPassword ? <Visibility titleAccess="Hide password" /> : <VisibilityOff titleAccess="Show password" />}
             </IconButton>
           </InputAdornment>
         ),

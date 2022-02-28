@@ -1,5 +1,4 @@
 import React from 'react';
-// import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
@@ -10,28 +9,26 @@ import {
 } from 'formik';
 import * as yup from 'yup';
 import { InputTextField } from '../Shared/Components/InputTextField';
-import { CustomizedDialogs } from '../Shared/Components/ModalComponent';
-import ResetPassword from './ResetPassword';
 
 const useStyles = makeStyles((theme) => ({
   main: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100vh',
+    alignItems: 'center',
     [theme.breakpoints.down('sm')]: {
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      minHeight: '100vh',
     },
   },
   formMain: {
     display: 'flex',
     flexDirection: 'column',
-    padding: theme.spacing(8, 5, 0, 5),
+    alignItems: 'center',
+    padding: theme.spacing(5, 10, 5, 10),
     width: 'auto',
-    height: '100vh',
+    height: 'auto',
     borderRadius: '0px',
     background: theme.palette.background.default,
     [theme.breakpoints.down('sm')]: {
@@ -42,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
   header: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     color: theme.palette.text.primary,
-    fontSize: theme.spacing(3.2),
+    fontSize: theme.spacing(2.8),
     marginTop: theme.spacing(0),
     fontWeight: theme.typography.fontWeightBold,
     [theme.breakpoints.down('sm')]: {
@@ -54,80 +51,60 @@ const useStyles = makeStyles((theme) => ({
   formContainer: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(0, 0),
+    marginTop: theme.spacing(0),
     [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(1),
     },
   },
   formControl: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    width: '100%',
 
   },
-  forgotPassword: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(2),
-    },
-  },
-  links: {
-    fontSize: theme.spacing(2.0),
-    color: theme.palette.primary.main,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(1.6),
-    },
-  },
+
   button: {
     background: theme.palette.mainBackground.color,
     width: '90%',
     color: theme.palette.text.primary,
-    marginTop: theme.spacing(0),
-    alignSelf: 'flex-start',
-    // borderRadius: '20px',
+    marginTop: theme.spacing(1.5),
+    alignSelf: 'center',
     fontWeight: theme.typography.fontWeightMedium,
-    fontSize: theme.spacing(2.4),
+    fontSize: theme.spacing(1.8),
     padding: theme.spacing(0.5, 0.5),
     [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(2.0),
-      marginTop: theme.spacing(1.5),
-      padding: theme.spacing(2, 2),
-      height: '40px',
+      fontSize: theme.spacing(1.4),
+      marginTop: theme.spacing(3),
+      padding: theme.spacing(0.5, 0.5),
+      height: 'auto',
       width: '100%',
     },
   },
 }));
 
 const validationSchema = yup.object().shape({
-  username: yup.string().required('Username is required'),
+  email: yup.string().email('Enter a valid email').required('Email is required'),
   password: yup
     .string()
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
 });
 
-export interface LoginFormData {
- username: string;
-  password: string;
+export interface ResetPasswordData {
+ email: string;
 }
 
-interface LoginFormProps {
+interface ResetPasswordProps {
   // visible: boolean;
   isSubmitting?: boolean;
   // onFormSubmitted: (data: SignUpFormData) => any;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = () => {
+export const ResetPassword: React.FC<ResetPasswordProps> = () => {
   const initialValues = {
-    username: '',
-    password: '',
+    email: '',
   };
 
-  const handleSubmit = (values: LoginFormData, formik: FormikHelpers<LoginFormData>) => {
+  const handleSubmit = (values: ResetPasswordData, formik: FormikHelpers<ResetPasswordData>) => {
     formik.setSubmitting(false);
   };
   const classes = useStyles();
@@ -146,50 +123,30 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
         <Grid container className={classes.main}>
           <Paper elevation={2} className={classes.formMain}>
             <Typography variant="h2" className={classes.header}>
-              Log in to your account
+              Reset Password
             </Typography>
             <Form className={classes.formContainer}>
               <Field
                 className={classes.formControl}
                 variant="outlined"
-                id="username"
-                type="username"
-                name="username"
-                label="Username"
+                id="email"
+                type="email"
+                name="email"
+                label="Email "
                 component={InputTextField}
-                value={values.username}
+                value={values.email}
                 onChange={handleChange}
-                error={touched.username && Boolean(errors.username)}
-                helperText={touched.username && errors.username}
-              />
-              <Field
-                className={classes.formControl}
-                variant="outlined"
-                id="password"
-                name="password"
-                type="password"
-                label="Password"
-                component={InputTextField}
-                value={values.password}
-                onChange={handleChange}
-                error={touched.password && Boolean(errors.password)}
-                helperText={touched.password && errors.password}
+                error={touched.email && Boolean(errors.email)}
+                helperText={touched.email && errors.email}
               />
 
-              <Grid
-                item
-                xs={12}
-                className={classes.forgotPassword}
-              >
-                <CustomizedDialogs linkTitle="Reset Password?" component={<ResetPassword isSubmitting={false} />} />
-              </Grid>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 variant="contained"
                 className={classes.button}
               >
-                Log In
+                Reset Password
               </Button>
             </Form>
           </Paper>
@@ -198,3 +155,5 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
     </Formik>
   );
 };
+
+export default ResetPassword;

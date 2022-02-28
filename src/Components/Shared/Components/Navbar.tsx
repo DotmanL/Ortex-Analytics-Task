@@ -7,21 +7,25 @@ import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import DarkModeToggle from './DarkModeToggle';
+import ortex from '../assets/ortexmainlog.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
   toolbar: {
     display: 'flex',
-    // background: 'orange',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      // justifyContent: 'center',
+    },
   },
   appBar: {
     background: theme.palette.background.paper,
@@ -30,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     height: '90px',
     borderBottom: '0px solid',
     borderBottomColor: theme.palette.divider,
-    // width: '100vw',
     padding: theme.spacing(0, 0),
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
@@ -55,31 +58,54 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
     },
   },
-
   iconButtonContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    // background: 'blue',
+  },
+  logoNameContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    [theme.breakpoints.down('sm')]: {
+
+    },
   },
   navLinks: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     color: theme.palette.text.primary,
-    // background: 'green',
   },
   appName: {
-    fontSize: theme.spacing(4.8),
-    fontFamily: 'Montserrat',
+    fontSize: theme.spacing(3.6),
+    fontFamily: 'Montserrat Alternates',
     fontWeight: 900,
     color: theme.palette.text.primary,
     [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(2.4),
+      fontSize: theme.spacing(1.8),
     },
   },
+  appLogo: {
+    display: 'flex',
+    width: '80px',
+    height: '80px',
+    [theme.breakpoints.down('sm')]: {
+      width: '40px',
+      height: '40px',
+    },
+  },
+  close: {
+    marginLeft: theme.spacing(1),
+  },
   drawer: {
-    width: 250,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    width: '100vw',
+    marginTop: theme.spacing(1),
+    padding: theme.spacing(1, 2),
   },
   button: {
     color: theme.palette.background.default,
@@ -132,7 +158,6 @@ export const NavBar: React.FC<NavBarProps> = ({ appName }) => {
       className={classnames({
         [classes.new]: scrolledDownEnough,
         [classes.appBar]: !scrolledDownEnough,
-        // [classes.appBarHomePage]: homePage,
       })}
     >
       <Toolbar className={classes.toolbar}>
@@ -146,30 +171,40 @@ export const NavBar: React.FC<NavBarProps> = ({ appName }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.appName}>{appName}</Typography>
+          <Grid className={classes.logoNameContainer}>
+            <Grid className={classes.appLogo}>
+              <img src={ortex} alt="ortex logo" />
+            </Grid>
+            <Typography variant="h6" className={classes.appName}>{appName}</Typography>
+          </Grid>
         </Grid>
         <Grid className={classes.navLinks}>
-          <Typography>NAVKLINKS</Typography>
+          {/* <Typography>NAVKLINKS</Typography> */}
           <DarkModeToggle />
         </Grid>
         <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-          <List className={classes.drawer}>
-            <ListItem button>
-              <ListItemText primary="Home" />
-            </ListItem>
+          <Grid className={classes.drawer}>
+            <Grid container className={classes.close}>
+              <CloseIcon onClick={() => setIsDrawerOpen(false)} />
+            </Grid>
+            <List>
+              <ListItem button>
+                <ListItemText primary="Data" />
+              </ListItem>
 
-            <ListItem button>
-              <ListItemText primary="About" />
-            </ListItem>
+              <ListItem button>
+                <ListItemText primary="Ideas" />
+              </ListItem>
 
-            <ListItem button>
-              <ListItemText primary="Contact" />
-            </ListItem>
+              <ListItem button>
+                <ListItemText primary="Features" />
+              </ListItem>
 
-            <ListItem button>
-              <ListItemText primary="Services" />
-            </ListItem>
-          </List>
+              <ListItem button>
+                <ListItemText primary="Pricing" />
+              </ListItem>
+            </List>
+          </Grid>
         </Drawer>
       </Toolbar>
     </AppBar>

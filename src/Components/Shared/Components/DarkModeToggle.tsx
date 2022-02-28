@@ -19,7 +19,7 @@ export default () => {
         }}
       >
         <IconButton onClick={colorMode.toggleColorMode} color="inherit">
-          {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+          {theme.palette.mode === 'dark' ? <Brightness7 titleAccess="Turn on the light" /> : <Brightness4 titleAccess="Turn off the light" />}
         </IconButton>
       </Box>
     </Toolbar>
