@@ -99,7 +99,7 @@ interface ResetPasswordProps {
   // onFormSubmitted: (data: SignUpFormData) => any;
 }
 
-export const ResetPassword: React.FC<ResetPasswordProps> = () => {
+const ResetPassword: React.FC<ResetPasswordProps> = () => {
   const initialValues = {
     email: '',
   };
