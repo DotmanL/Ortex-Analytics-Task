@@ -12,12 +12,13 @@ import * as yup from 'yup';
 import { InputTextField } from '../Shared/Components/InputTextField';
 import { CustomizedDialogs } from '../Shared/Components/ModalComponent';
 import ResetPassword from './ResetPassword';
+import TradingData from './TradingData';
 
 const useStyles = makeStyles((theme) => ({
   main: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100vh',
+    height: '100%',
     [theme.breakpoints.down('sm')]: {
       width: '100%',
       display: 'flex',
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     padding: theme.spacing(8, 5, 0, 5),
     width: 'auto',
-    height: '100vh',
+    height: '100%',
     borderRadius: '0px',
     background: theme.palette.background.default,
     [theme.breakpoints.down('sm')]: {
@@ -88,7 +89,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     marginTop: theme.spacing(0),
     alignSelf: 'flex-start',
-    // borderRadius: '20px',
     fontWeight: theme.typography.fontWeightMedium,
     fontSize: theme.spacing(2.4),
     padding: theme.spacing(0.5, 0.5),
@@ -97,6 +97,13 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1.5),
       padding: theme.spacing(2, 2),
       height: '40px',
+      width: '100%',
+    },
+  },
+  tradingDataContainer: {
+    display: 'none',
+    [theme.breakpoints.down('sm')]: {
+      display: 'flex',
       width: '100%',
     },
   },
@@ -192,7 +199,11 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
                 Log In
               </Button>
             </Form>
+            <Grid className={classes.tradingDataContainer}>
+              <TradingData />
+            </Grid>
           </Paper>
+
         </Grid>
       )}
     </Formik>

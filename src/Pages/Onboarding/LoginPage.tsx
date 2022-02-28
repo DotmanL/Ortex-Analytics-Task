@@ -13,7 +13,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     background: theme.palette.background.default,
     padding: theme.spacing(0, 0),
-    [theme.breakpoints.down('sm')]: {},
+    [theme.breakpoints.down('sm')]: {
+      width: '100vw',
+    },
   },
   container: {
     display: 'flex',
@@ -39,10 +41,11 @@ const useStyles = makeStyles((theme) => ({
   },
   landingPageContainer: {
     display: 'flex',
+    flexDirection: 'column',
     background: theme.palette.mainBackground.color,
     // background: 'red',
     width: '65%',
-    padding: theme.spacing(8, 3, 3, 15),
+    padding: theme.spacing(2, 3, 3, 3),
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
