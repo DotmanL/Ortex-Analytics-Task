@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(1.4),
       marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(1),
+      textAlign: 'center',
     },
   },
   tableContainer: {
@@ -42,6 +44,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: theme.spacing(1.6),
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(1.4),
+
     },
   },
   [`&.${tableCellClasses.body}`]: {
@@ -101,8 +104,6 @@ export const TradingData: React.FC = () => {
   return (
     <Grid className={classes.root}>
       <Typography className={classes.timestamp} variant="h6">
-        Timestamp:
-        {' '}
         {localDate === 'Invalid Date' ? '' : localDate}
       </Typography>
       <Grid>
@@ -113,7 +114,7 @@ export const TradingData: React.FC = () => {
               <TableRow>
                 <StyledTableCell>Majors</StyledTableCell>
                 <StyledTableCell align="center">Price</StyledTableCell>
-                <StyledTableCell align="center">Percentage Change</StyledTableCell>
+                <StyledTableCell align="center">% Change</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>

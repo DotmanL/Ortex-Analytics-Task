@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
   return (
     <Grid container className={classes.root}>
       <Helmet>
-        <title>Sign In - Ortex</title>
+        <title>Log In - Ortex</title>
       </Helmet>
       <NavBar appName="O R T E X" />
       <Grid container className={classes.container}>
