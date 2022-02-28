@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import TradingData from './TradingData';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { TradingData } from '../Shared/Components/TradingData';
 import financial from './assets/uanalyticsmain.svg';
 
 const useStyles = makeStyles((theme) => ({
@@ -51,21 +52,28 @@ const useStyles = makeStyles((theme) => ({
 
 const LandingPage: React.FC = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
   return (
-    <Grid container className={classes.root}>
-      <Grid className={classes.introContainer}>
-        <Typography variant="h3" className={classes.introText}>
-          Make smarter trades with ORTEX&#39;s
-          award-winning stock-data & ideas platform
-        </Typography>
-        <Grid className={classes.tradingDataContainer}>
-          <TradingData />
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {desktop && (
+      <Grid container className={classes.root}>
+        <Grid className={classes.introContainer}>
+          <Typography variant="h3" className={classes.introText}>
+            Make smarter trades with ORTEX&#39;s
+            award-winning stock-data & ideas platform
+          </Typography>
+          <Grid className={classes.tradingDataContainer}>
+            <TradingData />
+          </Grid>
+        </Grid>
+        <Grid className={classes.imageContainer}>
+          <img className={classes.image} src={financial} alt="art" />
         </Grid>
       </Grid>
-      <Grid className={classes.imageContainer}>
-        <img className={classes.image} src={financial} alt="art" />
-      </Grid>
-    </Grid>
+      )}
+    </>
   );
 };
 

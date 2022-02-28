@@ -3,16 +3,17 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import {
   Formik, Form, Field, FormikHelpers,
 } from 'formik';
 import * as yup from 'yup';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { InputTextField } from '../Shared/Components/InputTextField';
 import { CustomizedDialogs } from '../Shared/Components/ModalComponent';
 import ResetPassword from './ResetPassword';
-import TradingData from './TradingData';
+import { TradingData } from '../Shared/Components/TradingData';
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -101,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   tradingDataContainer: {
-    display: 'none',
+    display: 'FLEX',
     [theme.breakpoints.down('sm')]: {
       display: 'flex',
       width: '100%',
@@ -129,6 +130,8 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = () => {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   const initialValues = {
     username: '',
     password: '',
@@ -199,9 +202,12 @@ export const LoginForm: React.FC<LoginFormProps> = () => {
                 Log In
               </Button>
             </Form>
+            {mobile
+            && (
             <Grid className={classes.tradingDataContainer}>
               <TradingData />
             </Grid>
+            )}
           </Paper>
 
         </Grid>

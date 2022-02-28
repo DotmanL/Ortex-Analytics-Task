@@ -14,7 +14,6 @@ import TableRow from '@mui/material/TableRow';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    // background: 'red',
     flexDirection: 'column',
     padding: theme.spacing(0, 0),
     [theme.breakpoints.down('sm')]: {
@@ -22,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   timestamp: {
+    marginTop: theme.spacing(1),
     fontSize: theme.spacing(2.4),
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(1.4),
@@ -29,8 +29,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   tableContainer: {
-    // background: theme.palette.background.default,
-    // background: 'yellow',
     [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
@@ -78,21 +76,7 @@ const apiCall = {
 // topic: string;
 // }
 
-// function createData(
-//   ticker: string,
-//   price: number,
-//   date: number
-// ) {
-//   return ({
-//     ticker, price, date,
-//   });
-// };
-
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-
-// ];
-const TradingData: React.FC = () => {
+export const TradingData: React.FC = () => {
   const [tradeData, setTradeData] = React.useState([] as any);
 
   React.useEffect(() => {
@@ -108,21 +92,18 @@ const TradingData: React.FC = () => {
 
       return () => socket.close();
     };
-  });
+  }, []);
 
   const classes = useStyles();
-  // const theme = useTheme();
   const utcDate = tradeData.dt;
   const localDate = new Date(utcDate).toTimeString();
-
-  console.log(localDate);
 
   return (
     <Grid className={classes.root}>
       <Typography className={classes.timestamp} variant="h6">
         Timestamp:
         {' '}
-        {localDate}
+        {localDate === 'Invalid Date' ? '' : localDate}
       </Typography>
       <Grid>
 
@@ -159,5 +140,3 @@ const TradingData: React.FC = () => {
     </Grid>
   );
 };
-
-export default TradingData;
