@@ -4,12 +4,13 @@ import classnames from 'classnames';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -72,11 +73,18 @@ const useStyles = makeStyles((theme) => ({
 
     },
   },
-  navLinks: {
+  navLinksContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     color: theme.palette.text.primary,
+  },
+  navLinks: {
+    display: 'flex',
+    flexDirection: 'row',
+    '&:hover': {
+      color: theme.palette.text.primary,
+    },
   },
   appName: {
     fontSize: theme.spacing(3.6),
@@ -134,6 +142,8 @@ interface NavBarProps {
 
 export const NavBar: React.FC<NavBarProps> = ({ appName }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [scrolledDownEnough, setScrolledDownEnough] = useState(false);
 
@@ -178,8 +188,27 @@ export const NavBar: React.FC<NavBarProps> = ({ appName }) => {
             <Typography variant="h6" className={classes.appName}>{appName}</Typography>
           </Grid>
         </Grid>
-        <Grid className={classes.navLinks}>
-          {/* <Typography>NAVKLINKS</Typography> */}
+        <Grid className={classes.navLinksContainer}>
+
+          {desktop && (
+            <Grid className={classes.navLinks}>
+              <ListItem button>
+                <ListItemText primary="Data" />
+              </ListItem>
+
+              <ListItem button>
+                <ListItemText primary="Ideas" />
+              </ListItem>
+
+              <ListItem button>
+                <ListItemText primary="Features" />
+              </ListItem>
+
+              <ListItem button>
+                <ListItemText primary="Pricing" />
+              </ListItem>
+            </Grid>
+          )}
           <DarkModeToggle />
         </Grid>
         <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>

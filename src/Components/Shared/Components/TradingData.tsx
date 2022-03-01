@@ -74,9 +74,10 @@ const apiCall = {
 };
 
 // interface TradingDatas {
-//   dt?: number;
-// price?: number;
-// topic: string;
+//   i: string,
+//   dt: number;
+// price: number;
+// pch: string;
 // }
 
 export const TradingData: React.FC = () => {
@@ -88,14 +89,17 @@ export const TradingData: React.FC = () => {
       socket.send(JSON.stringify(apiCall));
       console.log(apiCall);
     };
-    socket.onmessage = async (event) => {
-      const json = await JSON.parse(event.data);
+    socket.onmessage = (event) => {
+      // if (apiCall.topic !== 'subscribe'){
+
+      // }
+      const json = JSON.parse(event.data);
       console.log(json);
       setTradeData(json);
-
-      return () => socket.close();
     };
-  }, []);
+
+    // return () => socket.close();
+  }, [tradeData]);
 
   const classes = useStyles();
   const utcDate = tradeData.dt;
