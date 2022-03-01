@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    background: theme.palette.background.paper,
+    background: theme.palette.background.default,
     top: '0',
     // boxShadow: 'none',
     height: '90px',
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   new: {
-    background: theme.palette.background.paper,
+    background: theme.palette.background.default,
     top: '0',
     height: '90px',
     padding: theme.spacing(0, 0),
@@ -100,12 +100,12 @@ const useStyles = makeStyles((theme) => ({
     width: '80px',
     height: '80px',
     [theme.breakpoints.down('sm')]: {
-      width: '40px',
-      height: '40px',
+      width: '50px',
+      height: '50px',
     },
   },
   close: {
-    marginLeft: theme.spacing(1),
+    margin: theme.spacing(1),
   },
   drawer: {
     display: 'flex',

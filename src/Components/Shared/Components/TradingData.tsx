@@ -10,6 +10,8 @@ import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +62,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
@@ -73,29 +74,20 @@ const apiCall = {
   to: 'EURUSD:CUR',
 };
 
-// interface TradingDatas {
-//   i: string,
-//   dt: number;
-// price: number;
-// pch: string;
-// }
-
 export const TradingData: React.FC = () => {
   const [tradeData, setTradeData] = React.useState([] as any);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    // eslint-disable-next-line no-unused-vars
     socket.onopen = () => {
       socket.send(JSON.stringify(apiCall));
-      console.log(apiCall);
+      // console.log(apiCall);
     };
     socket.onmessage = (event) => {
-      // if (apiCall.topic !== 'subscribe'){
-
-      // }
       const json = JSON.parse(event.data);
-      console.log(json);
+      // console.log(json);
       setTradeData(json);
+      setLoading(false);
     };
 
     // return () => socket.close();
@@ -105,7 +97,14 @@ export const TradingData: React.FC = () => {
   const utcDate = tradeData.dt;
   const localDate = new Date(utcDate).toTimeString();
 
-  return (
+  return loading ? (
+    <Box sx={{ width: '100%', height: '100%', mt: 2 }}>
+      <Skeleton />
+      <Skeleton animation="wave" />
+      <Skeleton animation={false} />
+      <Skeleton animation="wave" />
+    </Box>
+  ) : (
     <Grid className={classes.root}>
       <Typography className={classes.timestamp} variant="h6">
         {localDate === 'Invalid Date' ? '' : localDate}

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   introContainer: {
     display: 'flex',
-    width: '70%',
+    width: '80%',
     flexDirection: 'column',
   },
   introText: {

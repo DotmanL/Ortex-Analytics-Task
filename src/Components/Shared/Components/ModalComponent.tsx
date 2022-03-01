@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles, makeStyles, useTheme } from '@mui/styles';
 import Dialog from '@mui/material/Dialog';
-// import MuiDialogTitle from '@mui/material/DialogTitle';
 import MuiDialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -13,12 +12,12 @@ const useStyles = makeStyles((theme) => ({
   closeButton: {
     position: 'absolute',
     left: theme.spacing(1),
-    top: theme.spacing(0),
+    top: theme.spacing(1),
     color: theme.palette.grey[500],
-    [theme.breakpoints.down('sm')]: {},
   },
   linkTitle: {
-    color: theme.palette.text.primary,
+    color: theme.palette.mainBackground.color,
+    fontWeight: theme.typography.fontWeightMedium,
     width: 'auto',
     height: 'auto',
     padding: theme.spacing(0.5, 1),
@@ -75,7 +74,6 @@ export const CustomizedDialogs: React.FC<CustomizedDialogsProps> = ({ component,
       </Typography>
       {desktop && (
         <Dialog
-          // fullScreen
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
           open={open}

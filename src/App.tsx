@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
-// import { QueryClient, QueryClientProvider } from 'react-query';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ColorModeContext } from './Components/Shared/Components/ColorContext';
 import { getDesignTokens } from './Components/Shared/styles/theme';
@@ -13,8 +12,6 @@ declare module '@mui/styles/defaultTheme' {
 }
 
 const LoginPage = React.lazy(() => import('./Pages/Onboarding/LoginPage'));
-
-// const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   const [mode, setMode] = React.useState<'light' | 'dark'>('light');
@@ -35,7 +32,6 @@ const App: React.FC = () => {
   );
 
   return (
-  // <QueryClientProvider client={queryClient}>
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -52,7 +48,6 @@ const App: React.FC = () => {
         </Routes>
       </ThemeProvider>
     </ColorModeContext.Provider>
-  // </QueryClientProvider>
   );
 };
 
